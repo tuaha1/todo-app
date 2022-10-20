@@ -1,0 +1,25 @@
+.side-bar {
+    height: 100%;
+    min-height: 100%;
+    overflow: auto;
+    position: fixed;
+    background-color: antiquewhite;
+    padding: 0% 5px;
+}
+
+.first-block {
+    display: inline-block;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+.input-field {
+    padding: 2% 30%;
+}
+
+.category-button {
+    padding: 2%;
+}

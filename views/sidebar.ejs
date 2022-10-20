@@ -1,0 +1,40 @@
+<div class="side-bar">
+
+    <div>
+        <button class="btn btn-danger" style="width: 100%; margin-top: 3%;"> <a href="/delete"
+                style="text-decoration: none; color: white">Logout</a> </button>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 3%;"> <a href="/"
+                style="text-decoration: none; color: white">Home</a> </button>
+
+    </div>
+    <form action="/category" method="post">
+        <div style="padding: 2%;">
+            <label>Add New Item</label>
+            <input class="form-control" type="text" name="category" required>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 3%;"> new list</button>
+        </div>
+
+    </form>
+
+    <div>
+        <ul class="list-group list-group-light">
+
+            <% for(let i=0; i < category.length; i++) { %>
+                <div class="category-button">
+                    <form action="/switchcategory" method="post">
+                        <button style="width: 100%;" class="btn btn-dark" name="cat" value="<%= category[i] %>">
+                            <%= category[i] %>
+                        </button>
+                    </form>
+
+                </div>
+
+                <% } %>
+
+        </ul>
+
+
+    </div>
+
+
+</div>
