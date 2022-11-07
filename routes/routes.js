@@ -3,7 +3,6 @@ const todoItem = require("../models/todoItem");
 const route = express.Router();
 const User = require("../models/auth");
 const passport = require("passport");
-const { find } = require("../models/todoItem");
 
 const todoList = [];
 const categoryList = [];
@@ -72,12 +71,13 @@ route.post('/login', (req, res) => {
 route.get("/", async (req, res) => {
 
     if (!req.isAuthenticated()) {
-        res.render("register");
+        res.render("login");
     } else {
 
         console.log("current logged in user ", req.user.username, "there userID is ", req.user.userID);
 
-        const items = await todoItem.find({ userID: userID })
+        const items = await todoItem.find({ userID: userID });
+
         const categories = await todoItem.find({ userID: userID }).select('category');
 
         const kategorika = [];
@@ -100,19 +100,24 @@ route.get("/category/:id", async (req, res) => {
     }
 
     const categoryItem = req.params.id;
-    const categoryItems = await todoItem.find({ category: categoryItem });
-    categoryItems.shift();
+    // const categoryItems = await todoItem.find({ userID: userID });
+    const items = await todoItem.find({ userID: userID, category: categoryItem });
+    console.log(items)
+
+    items.shift();
 
     const categories = await todoItem.find({ userID: userID }).select('category');
 
+
     const kategorika = [];
+
     categories.forEach((element) => {
         if (!kategorika.includes(element.category)) {
             kategorika.push(element.category);
         }
     })
 
-    res.render("home", { todo: categoryItems, category: kategorika, showlist: true, title: categoryItem });
+    res.render("home", { todo: items, category: kategorika, showlist: true, title: categoryItem });
 });
 
 route.post("/category", function (req, res) {
@@ -126,7 +131,7 @@ route.post("/category", function (req, res) {
         name: newCategory,
         category: newCategory,
         userID: req.user.userID,
-    })
+    });
 
     mongoItem.save().then(() => {
         res.redirect("/category/" + newCategory);
