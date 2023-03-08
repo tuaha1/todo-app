@@ -209,7 +209,8 @@ route.post('/edit', async function (req, res) {
 
 route.post('/deleteCategory', (req, res) => {
 
-    const deleteCat = req.body.categoryTitle.replace(/\s/g, "");
+    // const deleteCat = req.body.categoryTitle.replace(/\s/g, "");
+    const deleteCat = req.body.categoryTitle;
     console.log("category to delete: ", deleteCat);
 
     todoItem.findOneAndDelete({ category: deleteCat }, function (err, doc) {

@@ -27,5 +27,5 @@ if (port == null || port == "") {
 }
 
 app.listen(port, function () {
-    console.log("server has started");
+    console.log("server has started at ", port);
 });

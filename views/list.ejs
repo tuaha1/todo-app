@@ -18,21 +18,26 @@
 
         <% if(todo.length < 1) {%>
             <form action="/deleteCategory" method="post">
-                <button class="btn btn-danger" style="width: 100%;" name="categoryTitle" value=" <%=title%> "
-                    type="submit">delete this
-                    category</button>
+                <button class="btn btn-danger" style="width: 100%;" name="categoryTitle" value="<%=title%>"
+                    type="submit"> delete this category</button>
             </form>
             <% } %>
 
                 <% for(let i=0; i < todo.length; i++) { %>
                     <li class="list-group-item">
-                        <form action="/delete" method="post">
-                            <input class="form-check-input me-1" type="checkbox" name="deleteItem"
-                                value="<%= todo[i].id %> " aria-label="..." onchange="this.form.submit()" />
-                        </form>
-                        <%= todo[i].name %>
-                            <button id="edit-button" value="<%= todo[i].id %> " data-toggle="modal"
+
+                        <div class="todo-item">
+                            <form action="/delete" method="post">
+                                <input class="form-check-input me-1" type="checkbox" name="deleteItem"
+                                    value="<%= todo[i].id %> " aria-label="..." onchange="this.form.submit()" />
+                            </form>
+                            <h3>
+                                <%= todo[i].name %>
+                            </h3>
+                            <button class="btn btn-dark" id="edit-button" value="<%= todo[i].id %> " data-toggle="modal"
                                 data-target="#myModal">edit</button>
+                        </div>
+
                     </li>
 
                     <% } %>
